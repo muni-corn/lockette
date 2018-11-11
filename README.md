@@ -1,2 +1,2 @@
-# lock-wallpaper-maker
-A little Go program that blurs and darkens an image to make it suitable for a lock screen (like i3lock-color)
+# lockette
+A little Go program that makes a wallpaper for a lock screen (pairs well with i3-lock)
