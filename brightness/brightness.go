@@ -21,6 +21,7 @@ type ImageSection int
 // Image section definitions
 const (
 	All ImageSection = iota
+    Center
 	LeftHalf
 	UpperHalf
 	RightHalf
@@ -38,6 +39,8 @@ func getBounds(img image.Image, section ImageSection) image.Rectangle {
 	switch section {
 	case All:
 		return img.Bounds()
+    case Center:
+		return image.Rect(w/3, h/3, w*2/3, h*2/3)
 	case LeftHalf:
 		return image.Rect(0, 0, w/2, h)
 	case UpperHalf:
@@ -61,7 +64,7 @@ func getBounds(img image.Image, section ImageSection) image.Rectangle {
 
 // GetImageBrightness returns an ImageBrightness pertaining
 // to the brightness of an image `img` and section `section`
-func GetImageBrightness(img image.Image, section ImageSection) ImageBrightness {
+func GetImageBrightness(img image.Image, section ImageSection) (classification ImageBrightness, brightness float32) {
     bounds := getBounds(img, section)
 
     var darkCount, lightCount int
@@ -78,11 +81,15 @@ func GetImageBrightness(img image.Image, section ImageSection) ImageBrightness {
         }
     }
 
+    brightness = float32(lightCount)/float32(darkCount+lightCount)
+
     // if more light pixels than dark pixels, return light
     if (lightCount > darkCount) {
-        return Light
+        classification = Light
     }
 
     // else, return Dark
-    return Dark
+    classification = Dark
+
+    return
 }

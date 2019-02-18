@@ -6,7 +6,7 @@ import (
     "image"
     _ "image/jpeg"
     _ "image/png"
-    "lockette/brightness"
+    "github.com/harrisonthorne/lockette/brightness"
 )
 
 func main() {
@@ -29,5 +29,7 @@ func main() {
         os.Exit(1);
     }
 
-    fmt.Print(brightness.GetImageBrightness(img, brightness.UpperLeft))
+    classification, _ := brightness.GetImageBrightness(img, brightness.Center)
+
+    fmt.Print(classification)
 }
