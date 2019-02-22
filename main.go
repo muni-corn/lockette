@@ -6,7 +6,7 @@ import (
     "image"
     _ "image/jpeg"
     _ "image/png"
-    "github.com/harrisonthorne/lockette/brightness"
+    "github.com/harrisonthorne/brite"
 )
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
         os.Exit(1);
     }
 
-    classification, _ := brightness.GetImageBrightness(img, brightness.Center)
+    classification, _ := brite.GetImageBrightness(img, brite.Center)
 
     fmt.Print(classification)
 }
